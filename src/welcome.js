@@ -1,10 +1,27 @@
-//import {computedFrom} from 'aurelia-framework';
+import {inject} from 'aurelia-framework';
+import {HttpClient} from 'aurelia-fetch-client';
+import 'fetch';
 
+@inject(HttpClient)
 export class Welcome {
-  heading = 'Welcome to the Aurelia Navigation App!';
+
+  _url = 'http://validate.jsontest.com/?json=[JSON-code-to-validate]';
   firstName = 'John';
   lastName = 'Doe';
   previousValue = this.fullName;
+
+  heading = 'PRova get JSON';
+  users = [];
+
+  constructor(http) {
+    http.configure(config => {
+      config
+        .useStandardConfiguration()
+        .withBaseUrl('http://validate.jsontest.com/');
+    });
+
+    this.http = http;
+  }
 
   //Getters can't be directly observed, so they must be dirty checked.
   //However, if you tell Aurelia the dependencies, it no longer needs to dirty check the property.
@@ -16,8 +33,11 @@ export class Welcome {
   }
 
   submit() {
-    this.previousValue = this.fullName;
-    alert(`Welcome, ${this.fullName}!`);
+    var data = this.http.fetch('?json=[JSON-code-to-validate]')
+      .then(response => response.json())
+      .then(users => this.users = users);
+      console.log(data);
+      alert(data);
   }
 
   canDeactivate() {
