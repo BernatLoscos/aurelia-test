@@ -1,7 +1,7 @@
 //Note: This file is provided as an aid to help you get up and running with
 //Electron for desktop apps. See the readme file for more information.
 /* eslint-disable strict, no-var, no-console */
-
+/*
 'use strict';
 
 var app = require('app');
@@ -30,3 +30,4 @@ app.on('ready', function() {
     mainWindow = null;
   });
 });
+*/

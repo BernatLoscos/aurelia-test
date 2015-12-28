@@ -8,17 +8,17 @@ export class test_json {
   users = [];
   _url = 'http://jsonplaceholder.typicode.com/posts?userId=1';
 
-  constructor(http) {
+  constructor() {
   /*  http.configure(config => {
       config
         .useStandardConfiguration()
         .withBaseUrl('http://jsonplaceholder.typicode.com/');
     });*/
-    this.http = http;
+    this.http = new HttpClient();
   }
 
   activate() {
-    return this.http.fetch('http://jsonplaceholder.typicode.com/posts?userId=1')
+    this.http.fetch(this._url)
       .then(response => response.json())
       .then(data => this.users = data);
 
