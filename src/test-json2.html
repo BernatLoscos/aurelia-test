@@ -2,12 +2,16 @@
   <require from="blur-image"></require>
   <section class="au-animate">
     <h2>${heading}</h2>
-    <form role="form" submit.delegate="send_data()">
-    <div class="form-group" repeat.for="titles of data">
-      <label for="fn">Title JSON</label>
-      <input type="text" value.bind="titles.title" class="form-control" id="fn" placeholder="first name">
+    <form role="form" submit.delegate="save_file_data()" validate.bind="validation">
+    <div class="form-group" repeat.for="titles of dataVar">
+    <!--<div class="form-group">-->
+      <label>Title JSON</label>
+      <input type="text" value.bind="titles.title" class="form-control">
     </div>
-    <button type="submit" class="btn btn-default">Enviar dades</button>
+    <button type="submit" show.bind="!(dataVar.length == 0)" class="btn btn-default">Download data</button>
   </form>
+  <button type="submit" class="btn btn-default" click.trigger="set_one_row()">Obtain one row</button>
+  <button type="submit" class="btn btn-default" click.trigger="set_all_rows()">Obtain all rows</button>
+  <button type="submit" class="btn btn-default" click.trigger="clear_page()">Clear page</button>
   </section>
 </template>
